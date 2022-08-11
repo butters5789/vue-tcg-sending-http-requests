@@ -10,6 +10,8 @@
 
       <p v-if="isLoading">Loading...</p>
 
+      <p v-else-if="!isLoading && error">{{ error }}</p>
+
       <p v-else-if="!isLoading && (!results || results.length === 0)">
         No results found, make some!
       </p>
@@ -35,12 +37,14 @@ export default {
   },
   data() {
     return {
+      error: null,
       isLoading: false,
       results: [],
     };
   },
   methods: {
     getSubmittedExperiences() {
+      this.error = null;
       this.isLoading = true;
 
       fetch(
@@ -65,6 +69,13 @@ export default {
           }
 
           this.results = results;
+
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.error = 'Failed to fetch data due to an error - please try again.';
+
+          console.error(error);
 
           this.isLoading = false;
         });
