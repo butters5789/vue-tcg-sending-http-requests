@@ -10,6 +10,10 @@
 
       <p v-if="isLoading">Loading...</p>
 
+      <p v-else-if="!isLoading && (!results || results.length === 0)">
+        No results found, make some!
+      </p>
+
       <ul v-else>
         <survey-result
           v-for="result in results"
