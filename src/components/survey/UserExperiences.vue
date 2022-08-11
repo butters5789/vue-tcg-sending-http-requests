@@ -48,7 +48,7 @@ export default {
       this.isLoading = true;
 
       fetch(
-        'https://vue-sending-http-request-5563f-default-rtdb.firebaseio.com/surveys.json'
+        ''
       )
         .then((response) => {
           if (response.ok) {
